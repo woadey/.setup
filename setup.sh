@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [[ `dpkg-query -l zsh > /dev/null` -eq 0 ]]
+dpkg-query -l zsh > /dev/null
+FINAL=$?
+
+echo $FINAL
+if [[ $FINAL -eq 0 ]]
 then
     echo "[-] zsh is already installed! Skipping..."
 else
