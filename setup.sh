@@ -17,7 +17,6 @@ else
     chsh -s $(which zsh)
 fi
 
-echo "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
 then
     echo "[-] oh-my-zsh is already installed! Skipping..."

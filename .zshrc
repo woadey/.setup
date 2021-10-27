@@ -115,6 +115,7 @@ source $ZSH/oh-my-zsh.sh
 # My Aliases
 alias python="python3"
 alias ida="/opt/ida7.6/ida64"
+alias setup="cd $HOME/setup"
 alias school="cd $HOME/Documents/school"
 alias ctf="cd $HOME/Documents/ctf"
 alias hc="cd $HOME/Documents/ctf/hc"
