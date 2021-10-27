@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/woadey/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -115,7 +115,7 @@ source $ZSH/oh-my-zsh.sh
 # My Aliases
 alias python="python3"
 alias ida="/opt/ida7.6/ida64"
-alias school="cd /home/woadey/Documents/school"
-alias ctf="cd /home/woadey/Documents/ctf"
-alias hc="cd /home/woadey/Documents/ctf/hc"
-alias cse545="cd /home/woadey/Documents/school/cse545"
+alias school="cd $HOME/Documents/school"
+alias ctf="cd $HOME/Documents/ctf"
+alias hc="cd $HOME/Documents/ctf/hc"
+alias cse545="cd $HOME/Documents/school/cse545"
