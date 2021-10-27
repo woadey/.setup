@@ -2,10 +2,8 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 dpkg-query -l zsh > /dev/null
-FINAL=$?
-
-echo $FINAL
-if [[ $FINAL -eq 0 ]]
+RESULT=$?
+if [[ $RESULT -eq 0 ]]
 then
     echo "[-] zsh is already installed! Skipping..."
 else
@@ -33,8 +31,11 @@ if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k ]]
 then    
     echo "[-] powerlevel10k is already installed! Skipping..."
 else
-    echo "[*] Installing powerlevel10k"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
+    then
+        echo "[*] Installing powerlevel10k"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    fi
 fi
 
 echo "[*] Copying contents to $(eval echo ~$USER)" && cp $SCRIPT_DIR/{.gdbinit,.gdbinit-gef.py,.p10k.zsh,.zshrc} $HOME
