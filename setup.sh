@@ -38,5 +38,16 @@ else
     fi
 fi
 
+if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]
+then    
+    echo "[-] zsh-autosuggestions is already installed! Skipping..."
+else
+    if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
+    then
+        echo "[*] Installing zsh-autosuggestions"
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    fi
+fi
+
 echo "[*] Copying contents to $(eval echo ~$USER)" && cp $SCRIPT_DIR/{.gdbinit,.gdbinit-gef.py,.p10k.zsh,.zshrc} $HOME
 echo "[!] Please log out and log back in for changes to take effect..."
