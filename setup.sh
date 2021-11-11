@@ -74,7 +74,7 @@ then
 
     echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
     echo "[*] Installing 'Vimix-cursors'" && sudo $SCRIPT_DIR/Vimix-cursors/install.sh
-    echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 2k -t tela > /dev/null
+    echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
 else
     echo "[-] Skipping..."
 fi

@@ -143,15 +143,15 @@ install() {
 
     # Make sure the right resolution for grub is set
     if [[ ${screen} == '1080p' ]]; then
-      gfxmode="GRUB_GFXMODE=1920x1080,auto"
+      gfxmode="GRUB_GFXMODE=1920x1080x32,auto"
     elif [[ ${screen} == 'ultrawide' ]]; then
-      gfxmode="GRUB_GFXMODE=2560x1080,auto"
+      gfxmode="GRUB_GFXMODE=2560x1080x32,auto"
     elif [[ ${screen} == '4k' ]]; then
-      gfxmode="GRUB_GFXMODE=3840x2160,auto"
+      gfxmode="GRUB_GFXMODE=3840x2160x32,auto"
     elif [[ ${screen} == '2k' ]]; then
-      gfxmode="GRUB_GFXMODE=2560x1440,auto"
+      gfxmode="GRUB_GFXMODE=2560x1440x32,auto"
     elif [[ ${screen} == 'ultrawide2k' ]]; then
-      gfxmode="GRUB_GFXMODE=3440x1440,auto"
+      gfxmode="GRUB_GFXMODE=3440x1440x32,auto"
     fi
 
     if grep "GRUB_GFXMODE=" /etc/default/grub 2>&1 >/dev/null; then
