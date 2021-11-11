@@ -72,6 +72,21 @@ then
         sudo apt install gnome-shell-extensions -y
     fi
 
+    # Check if repo already hasn't added
+    if [[ $(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep papirus/papirus > /dev/null) -eq 1 ]]
+    then
+        echo "[*] Adding repo 'ppa:papirus/papirus'"
+        sudo add-apt-repository ppa:papirus/papirus
+    fi
+
+    if [[ $(dpkg-query -l papirus-icon-theme > /dev/null) -eq 0 ]]
+    then
+        echo "[-] 'papirus-icon-theme' is already installed! Skipping..."
+    else
+        echo "[*] Installing 'papirus-icon-theme'"
+        sudo apt install papirus-icon-theme -y
+    fi
+
     echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
     echo "[*] Installing 'Vimix-cursors'" && sudo $SCRIPT_DIR/Vimix-cursors/install.sh
     echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
