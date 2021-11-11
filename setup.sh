@@ -90,6 +90,12 @@ then
     echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
     echo "[*] Installing 'Vimix-cursors'" && sudo $SCRIPT_DIR/Vimix-cursors/install.sh
     echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
+ 
+    # TODO add support for:
+        # https://extensions.gnome.org/extension/1503/tray-icons/
+        # https://extensions.gnome.org/extension/921/multi-monitors-add-on/
+        # https://extensions.gnome.org/extension/307/dash-to-dock/
+        # https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 else
     echo "[-] Skipping..."
 fi
