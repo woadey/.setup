@@ -119,7 +119,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#00d75f'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # My Aliases
-alias file="explorer.exe"
+alias open="explorer.exe"
 alias python="python3"
 alias ida="/opt/ida7.6/ida64"
 alias setup="cd $HOME/setup"
