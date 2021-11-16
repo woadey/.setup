@@ -24,7 +24,7 @@ prompt () {
     fi
 }
 
-
+# TODO make submodule folder in setup
 #### zsh / powerlevel 10k
 echo -e "\n==================== zsh / powerlevel 10k ===================="
 prompt "install zsh / powerlevel10k"
