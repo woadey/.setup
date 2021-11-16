@@ -12,6 +12,7 @@ install () {
     fi
 }
 
+#### Get User Feedback
 prompt () {
     read -p "[!] Would you like to $1? [Y/n] " -n 1 -r
     echo    # (optional) move to a new line
@@ -23,9 +24,11 @@ prompt () {
     fi
 }
 
+
 #### zsh / powerlevel 10k
 echo -e "\n==================== zsh / powerlevel 10k ===================="
 prompt "install zsh / powerlevel10k"
+
 if [[ $prompt_result -eq 1 ]]
 then
     install "zsh"
@@ -36,6 +39,8 @@ then
     else
         echo "[*] Changing 'zsh' to default shell"
         chsh -s $(which zsh)
+        echo "***Please log out and log back in for changes to take effect***"
+        sleep 1
     fi
 
     if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
@@ -67,15 +72,17 @@ then
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
         fi
     fi
+
+    # TODO Install FONTS https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
 else
     echo "[-] Skipping..."
 fi
 
 
-
 #### Gnome Customizations
 echo -e "\n==================== Gnome Customizations ===================="
 prompt "install Gnome Customizations"
+
 if [[ $prompt_result -eq 1 ]]
 then
     install "gnome-tweaks"
@@ -89,6 +96,7 @@ then
         sudo add-apt-repository ppa:papirus/papirus
     fi
 
+    # TODO check if these actually need to be installed...
     echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
     echo "[*] Installing 'Vimix-cursors'" && sudo $SCRIPT_DIR/Vimix-cursors/install.sh
     echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
@@ -106,12 +114,25 @@ fi
 #### Copy dotfiles
 echo -e "\n========================== dotfiles =========================="
 prompt "upload dotfiles"
+
 if [[ $prompt_result -eq 1 ]]
 then
-    echo "[*] Copying dotfiles to '$(eval echo ~$USER)'" && cp $SCRIPT_DIR/{.gdbinit,.gdbinit-gef.py,.p10k.zsh,.zshrc} $HOME
+    echo "[*] Symlinking dotfiles to '$(eval echo ~$USER)'"
+    FILES_TO_SYMLINK=$(find $SCRIPT_DIR/dotfiles -maxdepth 1 -name ".*" -not -name .git)
+    OLD_VIM_DIR=$HOME/.vim
+    if [[ ! -L $OLD_VIM_DIR ]] && [[ -d $OLD_VIM_DIR ]]
+    then
+        echo "[!] Removing old '.vim' directory..."
+        sudo rm -rf $HOME/.vim
+    fi 
+    for file in $FILES_TO_SYMLINK; do
+        echo -e "\t[+] $HOME/$(basename $file) -> $file"
+        ln -s -f $file $HOME/$(basename $file)  
+    done
 else
     echo "[-] Skipping..."
 fi
 
-echo -e "\nPlease log out and log back in for changes to take effect..."
-sleep 3
+# TODO check on vim plugins, especially https://github.com/ycm-core/YouCompleteMe
+
+sleep 1
