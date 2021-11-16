@@ -1,6 +1,3 @@
-[submodule "YouCompleteMe"]
-	path = YouCompleteMe
-	url = https://github.com/ycm-core/YouCompleteMe.git
-[submodule "dotfiles/.vim/plugged/dotfiles/.vim/plugged/YouCompleteMe"]
-	path = dotfiles/.vim/plugged/dotfiles/.vim/plugged/YouCompleteMe
+[submodule "dotfiles/.vim/plugged/YouCompleteMe"]
+	path = dotfiles/.vim/plugged/YouCompleteMe
 	url = https://github.com/ycm-core/YouCompleteMe.git
