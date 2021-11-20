@@ -98,7 +98,7 @@ then
 
     if [[ -d "/usr/share/themes/Orchis" ]] # lazy check
     then 
-        echo "[-] 'Orchis-theme' is already the default shell! Skipping..."
+        echo "[-] 'Orchis-theme' is already installed! Skipping..."
     else
         echo "[*] Installing 'Orchis-theme'"
         sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact > /dev/null 2>&1
@@ -107,14 +107,21 @@ then
     DEST_DIR="/usr/share/icons/"
     if [[ -d $DEST_DIR/Vimix-cursors ]] # lazy check
     then
-        echo "[-] 'Vimix-cursors' is already the default shell! Skipping..."
+        echo "[-] 'Vimix-cursors' is already installed! Skipping..."
     else
         echo "[*] Installing 'Vimix-cursors'"
         sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist $DEST_DIR/Vimix-cursors
         sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist-white $DEST_DIR/Vimix-white-cursors
     fi
 
-    # echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
+    if [[ -d "/usr/share/grub/themes/tela" ]] # lazy check
+    then
+        echo "[-] 'grub2-themes' is already installed! Skipping..."
+    else
+        echo "[*] Installing 'grub2-themes'"
+        sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela > /dev/null 2>&1
+    fi
+    
  
     # TODO add support for:
         # https://extensions.gnome.org/extension/1503/tray-icons/
@@ -166,4 +173,4 @@ fi
 
 # TODO check on vim plugins, especially https://github.com/ycm-core/YouCompleteMe
 
-sleep 1
+# sleep 1

@@ -7,3 +7,6 @@
 [submodule "/home/woadey/.setup/Orchis-theme"]
 	path = /home/woadey/.setup/Orchis-theme
 	url = https://github.com/vinceliuice/Orchis-theme.git
+[submodule "/home/woadey/.setup/grub2-themes"]
+	path = /home/woadey/.setup/grub2-themes
+	url = https://github.com/vinceliuice/grub2-themes.git
