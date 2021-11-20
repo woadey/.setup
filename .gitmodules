@@ -4,3 +4,6 @@
 [submodule "/home/woadey/.setup/Vimix-cursors"]
 	path = /home/woadey/.setup/Vimix-cursors
 	url = https://github.com/vinceliuice/Vimix-cursors.git
+[submodule "/home/woadey/.setup/Orchis-theme"]
+	path = /home/woadey/.setup/Orchis-theme
+	url = https://github.com/vinceliuice/Orchis-theme.git

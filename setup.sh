@@ -96,11 +96,16 @@ then
         sudo add-apt-repository ppa:papirus/papirus
     fi
 
-    # TODO check if these actually need to be installed...
-    # echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
+    if [[ -d "/usr/share/themes/Orchis" ]] # lazy check
+    then 
+        echo "[-] 'Orchis-theme' is already the default shell! Skipping..."
+    else
+        echo "[*] Installing 'Orchis-theme'"
+        sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact > /dev/null 2>&1
+    fi
 
     DEST_DIR="/usr/share/icons/"
-    if [[ -d $DEST_DIR/Vimix-cursors ]] && [[ -d $DEST_DIR/Vimix-white-cursors]]
+    if [[ -d $DEST_DIR/Vimix-cursors ]] # lazy check
     then
         echo "[-] 'Vimix-cursors' is already the default shell! Skipping..."
     else
