@@ -120,14 +120,30 @@ then
     echo "[*] Symlinking dotfiles to '$(eval echo ~$USER)'"
     FILES_TO_SYMLINK=$(find $SCRIPT_DIR/dotfiles -maxdepth 1 -name ".*" -not -name .git)
     OLD_VIM_DIR=$HOME/.vim
+
+    # not symlink file && is directory file
     if [[ ! -L $OLD_VIM_DIR ]] && [[ -d $OLD_VIM_DIR ]]
     then
         echo "[!] Removing old '.vim' directory..."
         sudo rm -rf $HOME/.vim
     fi 
+
+    # is a symlink file && matches correct location
+    if [[ -L $OLD_VIM_DIR ]] && [[ $(readlink -f $OLD_VIM_DIR) != "$SCRIPT_DIR/dotfiles/.vim" ]]
+    then
+        echo "[!] Removing old '.vim' symlink"
+        rm $HOME/.vim
+    fi
+
+    # overwrite symlinks
     for file in $FILES_TO_SYMLINK; do
-        echo -e "\t[+] $HOME/$(basename $file) -> $file"
-        ln -s -f $file $HOME/$(basename $file)  
+        if [[ $(readlink -f $HOME/$(basename $file)) == $file ]]
+        then
+            echo -e "\t[!] '$HOME/$(basename $file)' already properly linked. Skipping..."
+        else
+            echo -e "\t[+] '$HOME/$(basename $file)' -> '$file'"
+            ln -s -f $file $HOME/$(basename $file)
+        fi  
     done
 else
     echo "[-] Skipping..."
