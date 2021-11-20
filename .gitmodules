@@ -1,3 +1,6 @@
 [submodule "dotfiles/.vim/plugged/YouCompleteMe"]
 	path = dotfiles/.vim/plugged/YouCompleteMe
 	url = https://github.com/ycm-core/YouCompleteMe.git
+[submodule "/home/woadey/.setup/Vimix-cursors"]
+	path = /home/woadey/.setup/Vimix-cursors
+	url = https://github.com/vinceliuice/Vimix-cursors.git

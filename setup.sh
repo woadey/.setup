@@ -97,9 +97,19 @@ then
     fi
 
     # TODO check if these actually need to be installed...
-    echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
-    echo "[*] Installing 'Vimix-cursors'" && sudo $SCRIPT_DIR/Vimix-cursors/install.sh
-    echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
+    # echo "[*] Installing 'Orchis-theme'" && sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact
+
+    DEST_DIR="/usr/share/icons/"
+    if [[ -d $DEST_DIR/Vimix-cursors ]] && [[ -d $DEST_DIR/Vimix-white-cursors]]
+    then
+        echo "[-] 'Vimix-cursors' is already the default shell! Skipping..."
+    else
+        echo "[*] Installing 'Vimix-cursors'"
+        sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist $DEST_DIR/Vimix-cursors
+        sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist-white $DEST_DIR/Vimix-white-cursors
+    fi
+
+    # echo "[*] Installing 'grub2-themes'" && sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela
  
     # TODO add support for:
         # https://extensions.gnome.org/extension/1503/tray-icons/
