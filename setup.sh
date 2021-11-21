@@ -148,13 +148,6 @@ then
     then
         echo "[!] Removing old '.vim' directory..."
         sudo rm -rf $HOME/.vim
-    fi 
-
-    # is a symlink file && matches correct location
-    if [[ -L $OLD_VIM_DIR ]] && [[ $(readlink -f $OLD_VIM_DIR) != "$SCRIPT_DIR/dotfiles/.vim" ]]
-    then
-        echo "[!] Removing old '.vim' symlink"
-        rm $HOME/.vim
     fi
 
     # overwrite symlinks
