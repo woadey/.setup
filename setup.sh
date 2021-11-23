@@ -8,7 +8,7 @@ install () {
         echo "[-] '$1' is already installed! Skipping..."
     else
         echo "[*] Installing '$1'"
-        sudo apt install $1 -y
+        sudo apt install $1 -y > /dev/null 2>&1
     fi
 }
 
@@ -24,7 +24,6 @@ prompt () {
     fi
 }
 
-# TODO make submodule folder in setup
 #### zsh / powerlevel 10k
 echo -e "\n==================== zsh / powerlevel 10k ===================="
 prompt "install zsh / powerlevel10k"
@@ -48,7 +47,7 @@ then
         echo "[-] 'oh-my-zsh' is already installed! Skipping..."
     else
         echo "[*] Installing 'oh-my-zsh'"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1
     fi
 
     if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k ]]
@@ -58,7 +57,7 @@ then
         if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
         then
             echo "[*] Installing 'powerlevel10k'"
-            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k > /dev/null 2>&1
         fi
     fi
 
@@ -69,11 +68,9 @@ then
         if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
         then
             echo "[*] Installing 'zsh-autosuggestions'"
-            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions > /dev/null 2>&1
         fi
     fi
-
-    # TODO Install FONTS https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
 else
     echo "[-] Skipping..."
 fi
