@@ -170,7 +170,8 @@ then
     echo "[*] Installing vim plugins"
     vim +'PlugInstall --sync' +qa &>/dev/null
     echo "[*] Installing 'YouCompleteMe' dependencies"
-    python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py
+    sudo apt install build-essential cmake vim-nox python3-dev &> /dev/null
+    python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py --all &> /dev/null
 else
     echo "[-] Skipping..."
 fi
