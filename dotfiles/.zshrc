@@ -118,6 +118,9 @@ source $ZSH/oh-my-zsh.sh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#00d75f'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+# turn off bells
+unsetopt BEEP
+
 # My Aliases
 alias open="explorer.exe"
 alias python="python3"
