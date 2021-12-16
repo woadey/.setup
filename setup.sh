@@ -3,12 +3,12 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 #### Install Packages
 install () {
-    if [[ $(dpkg-query -l $1 > /dev/null 2>&1) -eq 0 ]]
+    if [[ $(dpkg-query -l $1 &> /dev/null) -eq 0 ]]
     then
         echo "[-] '$1' is already installed! Skipping..."
     else
         echo "[*] Installing '$1'"
-        sudo apt install $1 -y > /dev/null 2>&1
+        sudo apt install $1 -y &> /dev/null
     fi
 }
 
@@ -47,7 +47,7 @@ then
         echo "[-] 'oh-my-zsh' is already installed! Skipping..."
     else
         echo "[*] Installing 'oh-my-zsh'"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended &> /dev/null
     fi
 
     if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k ]]
@@ -57,7 +57,7 @@ then
         if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
         then
             echo "[*] Installing 'powerlevel10k'"
-            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k > /dev/null 2>&1
+            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k &> /dev/null
         fi
     fi
 
@@ -68,7 +68,7 @@ then
         if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
         then
             echo "[*] Installing 'zsh-autosuggestions'"
-            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions > /dev/null 2>&1
+            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &> /dev/null
         fi
     fi
 else
@@ -87,7 +87,7 @@ then
     install "papirus-icon-theme"
 
     # Check if repo already hasn't added
-    if [[ $(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep papirus/papirus > /dev/null) -eq 1 ]]
+    if [[ $(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep papirus/papirus &> /dev/null) -eq 1 ]]
     then
         echo "[*] Adding repo 'ppa:papirus/papirus'"
         sudo add-apt-repository ppa:papirus/papirus
@@ -98,7 +98,7 @@ then
         echo "[-] 'Orchis-theme' is already installed! Skipping..."
     else
         echo "[*] Installing 'Orchis-theme'"
-        sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact > /dev/null 2>&1
+        sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact &> /dev/null
     fi
 
     DEST_DIR="/usr/share/icons/"
@@ -116,7 +116,7 @@ then
         echo "[-] 'grub2-themes' is already installed! Skipping..."
     else
         echo "[*] Installing 'grub2-themes'"
-        sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela > /dev/null 2>&1
+        sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela &> /dev/null
     fi
     
  
@@ -168,9 +168,9 @@ prompt "configure vim"
 if [[ $prompt_result -eq 1 ]]
 then
     echo "[*] Installing vim plugins"
-    vim +'PlugInstall --sync' +qa > /dev/null 2>&1
+    vim +'PlugInstall --sync' +qa &>/dev/null
     echo "[*] Installing 'YouCompleteMe' dependencies"
-    python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py > /dev/null 2>&1
+    python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py
 else
     echo "[-] Skipping..."
 fi
