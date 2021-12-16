@@ -163,4 +163,17 @@ fi
 
 # TODO check on vim plugins, especially https://github.com/ycm-core/YouCompleteMe
 
+#### edit Vim
+echo -e "\n========================= vim config ========================="
+prompt "configure vim"
+
+if [[ $prompt_result -eq 1 ]]
+then
+    echo "[*] Installing vim plugins"
+    vim +'PlugInstall --sync' +qa > /dev/null 2>&1
+    echo "[*] Installing 'YouCompleteMe' dependencies"
+    python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py > /dev/null 2>&1
+else
+    echo "[-] Skipping..."
+fi
 # sleep 1
