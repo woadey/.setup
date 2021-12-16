@@ -161,8 +161,6 @@ else
     echo "[-] Skipping..."
 fi
 
-# TODO check on vim plugins, especially https://github.com/ycm-core/YouCompleteMe
-
 #### edit Vim
 echo -e "\n========================= vim config ========================="
 prompt "configure vim"
@@ -176,4 +174,3 @@ then
 else
     echo "[-] Skipping..."
 fi
-# sleep 1
