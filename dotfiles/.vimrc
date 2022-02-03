@@ -29,6 +29,8 @@ set undofile
 
 " Sound
 set noerrorbells
+set vb
+set t_vb=
 
 " Plugins
 call plug#begin('~/.vim/plugged')
