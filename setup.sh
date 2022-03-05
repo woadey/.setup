@@ -26,6 +26,7 @@ prompt () {
 
 #### setup
 echo -e "\n============================ setup ==========================="
+git submodule update --init --recursive &> /dev/null
 cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
 ./gogh/themes/vs-code-dark-plus.sh 
 echo "***Please change Terminal Preferences Font to Meslo***"

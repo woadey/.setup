@@ -19,3 +19,9 @@
 [submodule "gogh"]
 	path = gogh
 	url = https://github.com/Mayccoll/Gogh.git
+[submodule "dotfiles/.vim/plugged/vim-airline"]
+	path = dotfiles/.vim/plugged/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "dotfiles/.vim/plugged/vim-airline-themes"]
+	path = dotfiles/.vim/plugged/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
