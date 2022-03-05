@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 #### Install Packages
 install () {
-    if [[ $(dpkg-query -l $1 &> /dev/null) -eq 0 ]]
+    if [[ $(dpkg -s $1 &> /dev/null) -eq 0 ]]
     then
         echo "[-] '$1' is already installed! Skipping..."
     else
@@ -23,6 +23,21 @@ prompt () {
         prompt_result=0
     fi
 }
+
+#### setup
+echo -e "\n============================ setup ==========================="
+install "curl"
+install "vim"
+
+
+#### git
+#curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+#echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+#sudo apt update
+#sudo apt install gh
+#gh auth login
+#git config --global user.email ssmits@asu.edu
+#git config --global user.name woadey
 
 #### zsh / powerlevel 10k
 echo -e "\n==================== zsh / powerlevel 10k ===================="
@@ -170,7 +185,7 @@ then
     echo "[*] Installing vim plugins"
     vim +'PlugInstall --sync' +qa &>/dev/null
     echo "[*] Installing 'YouCompleteMe' dependencies"
-    sudo apt install build-essential cmake vim-nox python3-dev &> /dev/null
+    sudo apt install build-essential cmake vim-nox python3-dev -y &> /dev/null
     python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py --all &> /dev/null
 else
     echo "[-] Skipping..."
