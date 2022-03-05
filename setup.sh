@@ -26,9 +26,11 @@ prompt () {
 
 #### setup
 echo -e "\n============================ setup ==========================="
+cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
+./gogh/themes/vs-code-dark-plus.sh 
+echo "***Please change Terminal Preferences Font to Meslo***"
 install "curl"
 install "vim"
-
 
 #### git
 #curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
