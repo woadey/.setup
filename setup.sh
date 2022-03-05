@@ -31,6 +31,7 @@ cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
 echo "***Please change Terminal Preferences Font to Meslo***"
 install "curl"
 install "vim"
+# install "grub-customizer"
 
 #### git
 #curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
