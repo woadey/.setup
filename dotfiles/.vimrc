@@ -34,7 +34,6 @@ set t_vb=
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'mbbill/undotree'
 Plug 'https://github.com/joshdick/onedark.vim.git'
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 Plug 'vim-airline/vim-airline'
