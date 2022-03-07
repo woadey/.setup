@@ -25,23 +25,37 @@ prompt () {
 }
 
 #### setup
-echo -e "\n============================ setup ==========================="
-git submodule update --init --recursive &> /dev/null
-cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
-./gogh/themes/vs-code-dark-plus.sh 
-echo "***Please change Terminal Preferences Font to Meslo***"
-install "curl"
-install "vim"
-# install "grub-customizer"
+echo -e "\n========================= init setup ========================="
+prompt "install all packages"
+if [[ $prompt_result -eq 1 ]]
+then
+    install "curl"
+    install "vim"
+    install "papirus-icon-theme"
+    install "grub-customizer"
+    install "flameshot"
 
-#### git
-#curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-#echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-#sudo apt update
-#sudo apt install gh
-#gh auth login
-#git config --global user.email ssmits@asu.edu
-#git config --global user.name woadey
+    #### git
+    echo -e "\n============================ git ============================="
+    prompt "install git"
+    if [[ $prompt_result -eq 1 ]]
+    then
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        install "gh"
+        gh auth login
+        git config --global user.email ssmits@asu.edu
+        git config --global user.name woadey
+    else
+        echo "[-] Skipping..."
+    fi
+    git submodule update --init --recursive &> /dev/null
+    cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
+    ./gogh/themes/vs-code-dark-plus.sh 
+    echo "***Please change Terminal Preferences Font to Meslo***"
+else
+    echo "[-] Skipping..."
+fi
 
 #### zsh / powerlevel 10k
 echo -e "\n==================== zsh / powerlevel 10k ===================="
