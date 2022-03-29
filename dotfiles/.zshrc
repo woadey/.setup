@@ -125,6 +125,7 @@ unsetopt BEEP
 alias open="explorer.exe"
 alias python="python3"
 alias ida="/opt/ida7.6/ida64"
+alias ghidra="/opt/ghidra/ghidraRun"
 alias setup="cd $HOME/setup"
 alias school="cd $HOME/Documents/school"
 alias ctf="cd $HOME/Documents/ctf"
