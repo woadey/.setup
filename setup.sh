@@ -34,6 +34,7 @@ then
     install "papirus-icon-theme"
     install "grub-customizer"
     install "flameshot"
+    install "tmux"
 
     #### git
     echo -e "\n============================ git ============================="
