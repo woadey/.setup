@@ -37,19 +37,19 @@ then
     install "tmux"
 
     #### git
-    echo -e "\n============================ git ============================="
-    prompt "install git"
-    if [[ $prompt_result -eq 1 ]]
-    then
-        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-        install "gh"
-        gh auth login
-        git config --global user.email ssmits@asu.edu
-        git config --global user.name woadey
-    else
-        echo "[-] Skipping..."
-    fi
+    # echo -e "\n============================ git ============================="
+    # prompt "install git"
+    # if [[ $prompt_result -eq 1 ]]
+    # then
+    #     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    #     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    #     install "gh"
+    #     gh auth login
+    #     git config --global user.email ssmits@asu.edu
+    #     git config --global user.name woadey
+    # else
+    #     echo "[-] Skipping..."
+    # fi
     git submodule update --init --recursive &> /dev/null
     cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
     ./gogh/themes/vs-code-dark-plus.sh 
@@ -64,8 +64,14 @@ prompt "install zsh / powerlevel10k"
 
 if [[ $prompt_result -eq 1 ]]
 then
-    install "zsh"
-
+    if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
+    then
+        echo "[-] 'oh-my-zsh' is already installed! Skipping..."
+    else
+        echo "[*] Installing 'oh-my-zsh'"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended &> /dev/null
+    fi
+    
     if [[ `echo $SHELL` == '/usr/bin/zsh' ]]
     then
         echo "[-] 'zsh' is already the default shell! Skipping..."
@@ -74,14 +80,6 @@ then
         chsh -s $(which zsh)
         echo "***Please log out and log back in for changes to take effect***"
         sleep 1
-    fi
-
-    if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
-    then
-        echo "[-] 'oh-my-zsh' is already installed! Skipping..."
-    else
-        echo "[*] Installing 'oh-my-zsh'"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended &> /dev/null
     fi
 
     if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k ]]
