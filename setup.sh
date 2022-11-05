@@ -35,6 +35,7 @@ then
     install "grub-customizer"
     install "flameshot"
     install "tmux"
+    install "xsel"
 
     #### git
     # echo -e "\n============================ git ============================="
