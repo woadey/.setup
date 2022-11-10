@@ -81,7 +81,8 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
   git
   zsh-autosuggestions
-  )
+  vi-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -120,6 +121,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # turn off bells
 unsetopt BEEP
+bindkey -v
 
 # My Aliases
 alias open="explorer.exe"
