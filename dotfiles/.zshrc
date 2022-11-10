@@ -81,6 +81,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
   git
   zsh-autosuggestions
+  zsh-syntax-highlighting
   vi-mode
 )
 
@@ -116,12 +117,13 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # zsh-autosuggestions config
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#00d75f'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # turn off bells
 unsetopt BEEP
 bindkey -v
+bindkey '\t' autosuggest-accept
 
 # My Aliases
 alias open="explorer.exe"

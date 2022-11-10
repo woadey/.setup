@@ -104,6 +104,17 @@ then
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &> /dev/null
         fi
     fi
+    
+    if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]
+    then    
+        echo "[-] 'zsh-syntax-highlighting' is already installed! Skipping..."
+    else
+        if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
+        then
+            echo "[*] Installing 'zsh-syntax-highlighting'"
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting &> /dev/null
+        fi
+    fi
 else
     echo "[-] Skipping..."
 fi
