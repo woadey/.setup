@@ -8,7 +8,7 @@ install () {
         echo "[-] '$1' is already installed! Skipping..."
     else
         echo "[*] Installing '$1'"
-        sudo apt install $1 -y &> /dev/null
+        sudo apt install $1 -y
     fi
 }
 
@@ -24,6 +24,13 @@ prompt () {
     fi
 }
 
+echo "==================== Installing submodules ==================="
+cd $SCRIPT_DIR
+git submodule update --init --recursive
+git config --global user.email ssmits@asu.edu
+git config --global user.name woadey
+cd - &>/dev/null
+
 #### setup
 echo -e "\n========================= init setup ========================="
 prompt "install all packages"
@@ -31,29 +38,11 @@ if [[ $prompt_result -eq 1 ]]
 then
     install "curl"
     install "vim"
-    install "papirus-icon-theme"
-    install "grub-customizer"
-    install "flameshot"
     install "tmux"
     install "xsel"
+    install "zsh"
 
-    #### git
-    # echo -e "\n============================ git ============================="
-    # prompt "install git"
-    # if [[ $prompt_result -eq 1 ]]
-    # then
-    #     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-    #     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-    #     install "gh"
-    #     gh auth login
-    #     git config --global user.email ssmits@asu.edu
-    #     git config --global user.name woadey
-    # else
-    #     echo "[-] Skipping..."
-    # fi
-    git submodule update --init --recursive &> /dev/null
-    cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
-    ./gogh/themes/vs-code-dark-plus.sh 
+    mkdir -p ~/.local/share/fonts && cp $SCRIPT_DIR/fonts/Meslo* ~/.local/share/fonts
     echo "***Please change Terminal Preferences Font to Meslo***"
 else
     echo "[-] Skipping..."
@@ -127,8 +116,11 @@ prompt "install Gnome Customizations"
 if [[ $prompt_result -eq 1 ]]
 then
     install "gnome-tweaks"
-    install "gnome-shell-extensions"
     install "papirus-icon-theme"
+    install "grub-customizer"
+    install "flameshot"
+    install "gnome-shell-extensions"
+    $SCRIPT_DIR/gogh/themes/vs-code-dark-plus.sh 
 
     # Check if repo already hasn't added
     if [[ $(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep papirus/papirus &> /dev/null) -eq 1 ]]
