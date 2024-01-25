@@ -124,6 +124,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 unsetopt BEEP
 bindkey -v
 bindkey '\t' autosuggest-accept
+bindkey \^K kill-line
 
 # My Aliases
 alias open="explorer.exe"
@@ -139,3 +140,4 @@ alias cse545="cd $HOME/school/cse545"
 alias cse548="cd $HOME/school/cse548"
 alias downloads="cd /mnt/c/Users/sean/Downloads"
 alias notepad="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
+export PATH="$PATH:$HOME/.local/bin"
