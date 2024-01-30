@@ -80,12 +80,22 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  tmux
   zsh-autosuggestions
   zsh-syntax-highlighting
-  vi-mode
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
+
+### PLUGIN CONFIGS ###
+# tmux
+# ZSH_TMUX_AUTOSTART='true'
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '\t' autosuggest-accept
 
 # User configuration
 
@@ -113,20 +123,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# zsh-autosuggestions config
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-# turn off bells
-unsetopt BEEP
-bindkey -v
-bindkey '\t' autosuggest-accept
-bindkey \^K kill-line
-
-# My Aliases
+### ALIASES ###
+alias zshconfig="vim $HOME/.zshrc"
+alias reload="source $HOME/.zshrc"
 alias open="explorer.exe"
 alias python="python3"
 alias ida="/opt/ida7.6/ida64"
@@ -140,4 +139,15 @@ alias cse545="cd $HOME/school/cse545"
 alias cse548="cd $HOME/school/cse548"
 alias downloads="cd /mnt/c/Users/sean/Downloads"
 alias notepad="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
+
+# turn off bells
+unsetopt BEEP
+
+# allow ctrl+k to clear the rest of the line
+bindkey \^K kill-line
+
+# Ensure .local/bin is in path
 export PATH="$PATH:$HOME/.local/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
