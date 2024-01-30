@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 #### Install Packages
 install () {
-    if dpkg -l | grep -q "^ii\s*$1 "
+    if dpkg -l | grep -q "^ii\s*$1"
     then
         echo "[-] '$1' is already installed! Skipping..."
     else
@@ -11,6 +11,16 @@ install () {
         sudo apt install $1 -y
     fi
 }
+
+gemstall () {
+    if gem list -i "$1" > /dev/null; then
+        echo "[-] '$1' gem is already installed! Skipping..."
+    else
+        echo "[*] Installing '$1' gem"
+        sudo gem install "$1"
+    fi
+}
+
 
 #### Get User Feedback
 prompt () {
@@ -90,62 +100,47 @@ fi
 echo -e "\n==================== zsh / powerlevel 10k ===================="
 prompt "install zsh / powerlevel10k"
 
-if [[ $prompt_result -eq 1 ]]
-then
-    if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
-    then
+if [[ $prompt_result -eq 1 ]]; then
+    OH_MY_ZSH_PATH="$HOME/.oh-my-zsh"
+    ZSH_CUSTOM_PATH="${ZSH_CUSTOM:-$OH_MY_ZSH_PATH/custom}"
+
+    if [[ -e "$OH_MY_ZSH_PATH/oh-my-zsh.sh" ]]; then
         echo "[-] 'oh-my-zsh' is already installed! Skipping..."
     else
         echo "[*] Installing 'oh-my-zsh'"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended &> /dev/null
     fi
     
-    if [[ `echo $SHELL` == '/usr/bin/zsh' ]]
-    then
+    if [[ $SHELL == '/usr/bin/zsh' ]]; then
         echo "[-] 'zsh' is already the default shell! Skipping..."
     else
         echo "[*] Changing 'zsh' to default shell"
-        chsh -s $(which zsh)
+        chsh -s "$(which zsh)"
         echo "***Please log out and log back in for changes to take effect***"
         sleep 1
     fi
 
-    if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k ]]
-    then    
-        echo "[-] 'powerlevel10k' is already installed! Skipping..."
-    else
-        if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
-        then
-            echo "[*] Installing 'powerlevel10k'"
-            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k &> /dev/null
+    function install_plugin_or_theme {
+        local name=$1
+        local git_url=$2
+        local path="$ZSH_CUSTOM_PATH/$name"
+        
+        if [[ -d $path ]]; then
+            echo "[-] '$name' is already installed! Skipping..."
+        elif [[ -e "$OH_MY_ZSH_PATH/oh-my-zsh.sh" ]]; then
+            echo "[*] Installing '$name'"
+            git clone --depth=1 $git_url $path &> /dev/null
         fi
-    fi
+    }
 
-    if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]
-    then    
-        echo "[-] 'zsh-autosuggestions' is already installed! Skipping..."
-    else
-        if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
-        then
-            echo "[*] Installing 'zsh-autosuggestions'"
-            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &> /dev/null
-        fi
-    fi
-    
-    if [[ -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]
-    then    
-        echo "[-] 'zsh-syntax-highlighting' is already installed! Skipping..."
-    else
-        if [[ -e $HOME/.oh-my-zsh/oh-my-zsh.sh ]]
-        then
-            echo "[*] Installing 'zsh-syntax-highlighting'"
-            git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting &> /dev/null
-        fi
-    fi
+    install_plugin_or_theme "themes/powerlevel10k" "https://github.com/romkatv/powerlevel10k.git"
+    install_plugin_or_theme "plugins/zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
+    install_plugin_or_theme "plugins/zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
+    install 'ruby-dev'
+    gemstall 'colorls'
 else
     echo "[-] Skipping..."
 fi
-
 
 
 #### edit Vim
