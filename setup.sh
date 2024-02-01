@@ -21,6 +21,14 @@ gemstall () {
     fi
 }
 
+brewstall () {
+    if brew list --formula | grep -q "^$1\$"; then
+        echo "[-] '$1' is already installed! Skipping..."
+    else
+        echo "[*] Installing '$1' brew"
+        brew install "$1"
+    fi
+}
 
 #### Get User Feedback
 prompt () {
@@ -136,9 +144,19 @@ if [[ $prompt_result -eq 1 ]]; then
     install_plugin_or_theme "themes/powerlevel10k" "https://github.com/romkatv/powerlevel10k.git"
     install_plugin_or_theme "plugins/zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
     install_plugin_or_theme "plugins/zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
-    intall 'bat'
+    install 'bat'
     install 'ruby-dev'
     gemstall 'colorls'
+    
+    # Install Homebrew
+    if [[ ! -d "/home/linuxbrew" ]]; then
+        echo "[*] Installing 'Homebrew'"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        echo "[-] Homebrew is already installed! Skipping..."
+    fi
+
+    brewstall 'fzf'
 else
     echo "[-] Skipping..."
 fi

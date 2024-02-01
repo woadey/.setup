@@ -84,9 +84,8 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   command-not-found
-  # git
-  tmux
   zsh-autosuggestions
+  zsh-interactive-cd
   zsh-syntax-highlighting
   z
 )
@@ -241,6 +240,9 @@ alias downloads="cd /mnt/c/Users/sean/Downloads"
 alias notepad="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
 alias ls="colorls -a --sort-dirs"
 alias cat="batcat"
+
+# brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # turn off bells
 unsetopt BEEP
