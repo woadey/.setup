@@ -136,6 +136,7 @@ if [[ $prompt_result -eq 1 ]]; then
     install_plugin_or_theme "themes/powerlevel10k" "https://github.com/romkatv/powerlevel10k.git"
     install_plugin_or_theme "plugins/zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
     install_plugin_or_theme "plugins/zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
+    intall 'bat'
     install 'ruby-dev'
     gemstall 'colorls'
 else
