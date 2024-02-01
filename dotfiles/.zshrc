@@ -239,7 +239,7 @@ alias cse548="cd $HOME/school/cse548"
 alias downloads="cd /mnt/c/Users/sean/Downloads"
 alias notepad="/mnt/c/Program\ Files/Notepad++/notepad++.exe"
 alias ls="colorls -a --sort-dirs"
-alias cat="batcat"
+alias bat="batcat"
 
 # brew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
