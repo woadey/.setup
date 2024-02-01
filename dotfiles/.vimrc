@@ -36,6 +36,7 @@ set t_vb=
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/joshdick/onedark.vim.git'
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()

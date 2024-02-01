@@ -21,15 +21,6 @@ gemstall () {
     fi
 }
 
-brewstall () {
-    if brew list --formula | grep -q "^$1\$"; then
-        echo "[-] '$1' is already installed! Skipping..."
-    else
-        echo "[*] Installing '$1' brew"
-        brew install "$1"
-    fi
-}
-
 #### Get User Feedback
 prompt () {
     read -p "[!] Would you like to $1? [Y/n] " -n 1 -r
@@ -90,6 +81,7 @@ echo -e "\n========================= init setup ========================="
 prompt "install all packages"
 if [[ $prompt_result -eq 1 ]]
 then
+    install "build-essential"
     install "curl"
     install "vim"
     install "tmux"
@@ -147,16 +139,7 @@ if [[ $prompt_result -eq 1 ]]; then
     install 'bat'
     install 'ruby-dev'
     gemstall 'colorls'
-    
-    # Install Homebrew
-    if [[ ! -d "/home/linuxbrew" ]]; then
-        echo "[*] Installing 'Homebrew'"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    else
-        echo "[-] Homebrew is already installed! Skipping..."
-    fi
-
-    brewstall 'fzf'
+    install 'fzf'
 else
     echo "[-] Skipping..."
 fi
@@ -171,65 +154,10 @@ then
     echo "[*] Installing vim plugins"
     vim +'PlugInstall --sync' +qa &>/dev/null
     echo "[*] Installing 'YouCompleteMe' dependencies"
-    sudo apt install build-essential cmake vim-nox python3-dev -y &> /dev/null
+    install "cmake" 
+    install "vim-nox" 
+    install "python3-dev"
     python3 $SCRIPT_DIR/dotfiles/.vim/plugged/YouCompleteMe/install.py --all &> /dev/null
 else
     echo "[-] Skipping..."
 fi
-
-
-#### Gnome Customizations for Desktop
-# echo -e "\n==================== Gnome Customizations ===================="
-# prompt "install Gnome Customizations"
-# 
-# if [[ $prompt_result -eq 1 ]]
-# then
-#     install "gnome-tweaks"
-#     install "papirus-icon-theme"
-#     install "grub-customizer"
-#     install "flameshot"
-#     install "gnome-shell-extensions"
-#     $SCRIPT_DIR/gogh/themes/vs-code-dark-plus.sh 
-# 
-#     # Check if repo already hasn't added
-#     if [[ $(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep papirus/papirus &> /dev/null) -eq 1 ]]
-#     then
-#         echo "[*] Adding repo 'ppa:papirus/papirus'"
-#         sudo add-apt-repository ppa:papirus/papirus
-#     fi
-# 
-#     if [[ -d "/usr/share/themes/Orchis" ]] # lazy check
-#     then 
-#         echo "[-] 'Orchis-theme' is already installed! Skipping..."
-#     else
-#         echo "[*] Installing 'Orchis-theme'"
-#         sudo $SCRIPT_DIR/Orchis-theme/install.sh -d /usr/share/themes --tweaks compact &> /dev/null
-#     fi
-# 
-#     DEST_DIR="/usr/share/icons/"
-#     if [[ -d $DEST_DIR/Vimix-cursors ]] # lazy check
-#     then
-#         echo "[-] 'Vimix-cursors' is already installed! Skipping..."
-#     else
-#         echo "[*] Installing 'Vimix-cursors'"
-#         sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist $DEST_DIR/Vimix-cursors
-#         sudo cp -r $SCRIPT_DIR/Vimix-cursors/dist-white $DEST_DIR/Vimix-white-cursors
-#     fi
-# 
-#     if [[ -d "/usr/share/grub/themes/tela" ]] # lazy check
-#     then
-#         echo "[-] 'grub2-themes' is already installed! Skipping..."
-#     else
-#         echo "[*] Installing 'grub2-themes'"
-#         sudo $SCRIPT_DIR/grub2-themes/install.sh -s 1080p -t tela &> /dev/null
-#     fi
-#     
-#  
-#     # TODO add support for:
-#         # https://extensions.gnome.org/extension/1503/tray-icons/
-#         # https://extensions.gnome.org/extension/921/multi-monitors-add-on/
-#         # https://extensions.gnome.org/extension/307/dash-to-dock/
-#         # https://extensions.gnome.org/extension/906/sound-output-device-chooser/
-# else
-#     echo "[-] Skipping..."
-# fi

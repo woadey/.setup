@@ -53,6 +53,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
+unsetopt correct_all
 ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
@@ -84,6 +85,8 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   command-not-found
+  git
+  web-search
   zsh-autosuggestions
   zsh-interactive-cd
   zsh-syntax-highlighting

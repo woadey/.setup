@@ -25,6 +25,9 @@
 [submodule "dotfiles/.vim/plugged/vim-airline-themes"]
 	path = dotfiles/.vim/plugged/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "dotfiles/.vim/plugged/vim-tmux-navigator"]
+	path = dotfiles/.vim/plugged/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "tpm"]
 	path = tpm
 	url = https://github.com/tmux-plugins/tpm
