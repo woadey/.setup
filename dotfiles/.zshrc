@@ -1,6 +1,6 @@
-if [ -z "$TMUX" ]; then
-  tmux
-fi
+# if [ -z "$TMUX" ]; then
+#  tmux
+# fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -97,7 +97,7 @@ source $ZSH/oh-my-zsh.sh
 
 ### PLUGIN CONFIGS ###
 # tmux
-ZSH_TMUX_AUTOSTART='true'
+# ZSH_TMUX_AUTOSTART='true'
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'=
